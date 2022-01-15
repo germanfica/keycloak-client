@@ -28,5 +28,53 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## NPM packages used
 
-- [angular-oauth2-oidc](https://www.npmjs.com/package/angular-oauth2-oidc)
+- [Angular OAuth 2.0 OIDC](https://www.npmjs.com/package/angular-oauth2-oidc)
+
+## Basic configuration
+
+– If you want to use PostgreSQL:
+
+```typescript
+...
+
+title = 'keycloak-frontend';
+
+  username: string;
+  isLogged: boolean;
+  isAdmin: boolean;
+
+  constructor(
+    private oauthService: OAuthService,
+    private messageService: MessageService,
+    private loginService: LoginService
+  ) {
+    this.configure();
+  }
+
+  authConfig: AuthConfig = {
+    issuer: 'http://localhost:8180/auth/realms/tutorial',
+    redirectUri: window.location.origin,
+    clientId: 'tutorial-frontend',
+    responseType: 'code',
+    scope: 'openid profile email offline_access',
+    showDebugInformation: true,
+  };
+
+  configure(): void {
+    this.oauthService.configure(this.authConfig);
+    this.oauthService.tokenValidationHandler = new NullValidationHandler();
+    this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.loadDiscoveryDocument().then(() => this.oauthService.tryLogin())
+      .then(() => {
+        if (this.oauthService.getIdentityClaims()) {
+          this.isLogged = this.loginService.getIsLogged();
+          this.isAdmin = this.loginService.getIsAdmin();
+          this.username = this.loginService.getUsername();
+          this.messageService.sendMessage(this.loginService.getUsername());
+        }
+      });
+  }
+
+...
+```
 
