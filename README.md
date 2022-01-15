@@ -1,6 +1,10 @@
-# ResourceClient
+# Angular 13 + OAuth2 Keycloak provider
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+
+## Related projects
+
+- [Spring Boot 2.6.2 Keycloak server](https://github.com/germanfica/keycloak-backend).
 
 ## Development server
 
