@@ -28,11 +28,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## NPM packages used
 
-- [Angular OAuth 2.0 OIDC](https://www.npmjs.com/package/angular-oauth2-oidc)
+- [Angular OAuth 2.0 OIDC NPM Package](https://www.npmjs.com/package/angular-oauth2-oidc)
 
 ## Basic configuration
 
-– If you want to use PostgreSQL:
+*app.component.ts*:
 
 ```typescript
 ...
